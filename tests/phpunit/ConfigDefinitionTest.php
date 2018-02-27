@@ -30,7 +30,8 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
     {
         $definition = new ConfigDefinition();
         $processor = new Processor();
-        $processedConfig = $processor->processConfiguration($definition, ['parameters' => ['depth' => 1]]);
+        $validConfigDefinition = ['parameters' => ['depth' => 1]];
+        $processedConfig = $processor->processConfiguration($definition, [$validConfigDefinition]);
         $expectedConfig = [
             "parameters" => [
                 "depth" => 1,
