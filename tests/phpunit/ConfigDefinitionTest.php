@@ -17,7 +17,8 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
     {
         $definition = new ConfigDefinition();
         $processor = new Processor();
-        $processedConfig = $processor->processConfiguration($definition, []);
+        $validEmptyConfig = ['parameters' => []];
+        $processedConfig = $processor->processConfiguration($definition, [$validEmptyConfig]);
         $expectedConfig = [
             "parameters" => [
                 "depth" => 0,
