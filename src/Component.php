@@ -1,0 +1,61 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Keboola\Processor\FlattenFolders;
+
+use Keboola\Component\BaseComponent;
+use Symfony\Component\Filesystem\Filesystem;
+
+/**
+ * Class Component
+ *
+ * Main processor class
+ *
+ * @package Keboola\Processor\FlattenFolders
+ */
+class Component extends BaseComponent
+{
+
+    private const OFFSET_FILE_TYPE = 1;
+    private const OFFSET_FOLDER = 2;
+    private const OFFSET_SUBFOLDER = 3;
+
+    /**
+     * Main execution routine
+     * @return void
+     */
+    public function run(): void
+    {
+        // get value with default value if not present
+        $depth = $this->getConfig()->getValue(['parameters', 'depth']);
+
+        $finder = new \Symfony\Component\Finder\Finder();
+        $finder->notName("*.manifest")->in($this->getDataDir() . "/in/files")->files()->in($this->getDataDir() . "/in/tables")->files();
+        $dataDirPartsCount = count(explode('/', $this->getDataDir()));
+        $fileSystem = new Filesystem();
+        foreach ($finder as $sourceFile) {
+            $pathParts = explode('/', $sourceFile->getPathname());
+            if ($depth === 0 || count($pathParts) === $dataDirPartsCount + 3) {
+                $flattenedName = flattenFilename(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
+            } else {
+                $fileSystem->mkdir(
+                    $this->getDataDir() .
+                    "/out/" .
+                    $pathParts[$dataDirPartsCount + self::OFFSET_FILE_TYPE] .
+                    "/" .
+                    $pathParts[$dataDirPartsCount + self::OFFSET_FOLDER]
+                );
+                $flattenedName = $pathParts[$dataDirPartsCount + self::OFFSET_FOLDER] .
+                    "/" .
+                    flattenFilename(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
+            }
+            $destination = $this->getDataDir() .
+                "/out/" .
+                $pathParts[$dataDirPartsCount + 1] .
+                "/" .
+                $flattenedName;
+            $fileSystem->rename($sourceFile->getPathname(), $destination);
+        }
+    }
+}
