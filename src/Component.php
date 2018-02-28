@@ -21,14 +21,24 @@ class Component extends BaseComponent
     private const OFFSET_FOLDER = 2;
     private const OFFSET_SUBFOLDER = 3;
 
+    protected function getConfigDefinitionClass(): string
+    {
+        return ConfigDefinition::class;
+    }
+
+    protected function getConfigClass(): string
+    {
+        return Config::class;
+    }
+
     /**
      * Main execution routine
      * @return void
      */
     public function run(): void
     {
-        // get value with default value if not present
-        $depth = $this->getConfig()->getValue(['parameters', 'depth']);
+        /** @var Config $config */
+        $config = $this->getConfig();
 
         $finder = new \Symfony\Component\Finder\Finder();
         $finder->notName("*.manifest")->in($this->getDataDir() . "/in/files")->files()->in($this->getDataDir() . "/in/tables")->files();
@@ -36,7 +46,7 @@ class Component extends BaseComponent
         $fileSystem = new Filesystem();
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
-            if ($depth === 0 || count($pathParts) === $dataDirPartsCount + 3) {
+            if ($config->getDepth() === 0 || count($pathParts) === $dataDirPartsCount + 3) {
                 $flattenedName = flattenFilename(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
             } else {
                 $fileSystem->mkdir(
