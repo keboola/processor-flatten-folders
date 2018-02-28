@@ -16,6 +16,9 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
  */
 class ConfigDefinition extends BaseConfigDefinition
 {
+    /**
+     * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition|\Symfony\Component\Config\Definition\Builder\NodeDefinition
+     */
     public function getParametersDefinition()
     {
         $treeBuilder = new TreeBuilder();
