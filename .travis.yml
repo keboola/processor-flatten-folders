@@ -5,8 +5,7 @@ services:
 before_script:
   - docker -v
   - docker build -t keboola/processor-flatten-folder .
-  - docker run keboola/processor-flatten-folder composer ci
-script: docker-compose run dev composer tests
+script: docker run keboola/processor-flatten-folder composer ci
 after_success:
   - docker images
 deploy:
