@@ -6,7 +6,7 @@ before_script:
   - docker -v
   - docker build -t keboola/processor-flatten-folder .
   - docker run keboola/processor-flatten-folder composer ci
-script: docker-compose run dev php /code/tests/run.php
+script: docker-compose run dev composer tests
 after_success:
   - docker images
 deploy:
