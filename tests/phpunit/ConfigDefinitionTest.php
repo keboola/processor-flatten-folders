@@ -65,8 +65,19 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
             'depth is not a number' => [
                 ['parameters' => ['depth' => 'invalid']],
                 InvalidConfigurationException::class,
-                'The child node "baseUrl" at path "parameters" must be configured.',
+                'Invalid type for path "root.parameters.depth". Expected int, but got string.',
             ],
+            'depth is too large' => [
+                ['parameters' => ['depth' => 2]],
+                InvalidConfigurationException::class,
+                'The value 2 is too big for path "root.parameters.depth". Should be less than or equal to 1',
+            ],
+            'depth is out too small' => [
+                ['parameters' => ['depth' => -1]],
+                InvalidConfigurationException::class,
+                'The value -1 is too small for path "root.parameters.depth". Should be greater than or equal to 0',
+            ],
+
         ];
     }
 }
