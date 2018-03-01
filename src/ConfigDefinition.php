@@ -19,7 +19,7 @@ class ConfigDefinition extends BaseConfigDefinition
         // @formatter:off
         $rootNode
             ->children()
-                ->integerNode("depth")
+                ->integerNode("starting_depth")
                     ->min(0)
                     ->max(1)
                     ->defaultValue(0)

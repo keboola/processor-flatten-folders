@@ -18,7 +18,7 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
         $processedConfig = $processor->processConfiguration($definition, [$validEmptyConfig]);
         $expectedConfig = [
             "parameters" => [
-                "depth" => 0,
+                "starting_depth" => 0,
             ],
         ];
         $this->assertSame($expectedConfig, $processedConfig);
@@ -28,11 +28,11 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
     {
         $definition = new ConfigDefinition();
         $processor = new Processor();
-        $validConfigDefinition = ['parameters' => ['depth' => 1]];
+        $validConfigDefinition = ['parameters' => ['starting_depth' => 1]];
         $processedConfig = $processor->processConfiguration($definition, [$validConfigDefinition]);
         $expectedConfig = [
             "parameters" => [
-                "depth" => 1,
+                "starting_depth" => 1,
             ],
         ];
         $this->assertSame($expectedConfig, $processedConfig);
@@ -60,19 +60,19 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
     {
         return [
             'depth is not a number' => [
-                ['parameters' => ['depth' => 'invalid']],
+                ['parameters' => ['starting_depth' => 'invalid']],
                 InvalidConfigurationException::class,
-                'Invalid type for path "root.parameters.depth". Expected int, but got string.',
+                'Invalid type for path "root.parameters.starting_depth". Expected int, but got string.',
             ],
             'depth is too large' => [
-                ['parameters' => ['depth' => 2]],
+                ['parameters' => ['starting_depth' => 2]],
                 InvalidConfigurationException::class,
-                'The value 2 is too big for path "root.parameters.depth". Should be less than or equal to 1',
+                'The value 2 is too big for path "root.parameters.starting_depth". Should be less than or equal to 1',
             ],
             'depth is out too small' => [
-                ['parameters' => ['depth' => -1]],
+                ['parameters' => ['starting_depth' => -1]],
                 InvalidConfigurationException::class,
-                'The value -1 is too small for path "root.parameters.depth". Should be greater than or equal to 0',
+                'The value -1 is too small for path "root.parameters.starting_depth". Should be greater than or equal to 0',
             ],
 
         ];

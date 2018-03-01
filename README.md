@@ -12,12 +12,12 @@ Manifest files are ignored (and not copied).
 
 The processor supports these optional parameters:
 
- - `depth` -- level, where the flattening happens, allowed values `0`, `1`, default `0`.
+ - `starting_depth` -- nesting level where the flattening starts, allowed values `0`, `1`, default `0`.
 
 
 ## Examples
 
-### Depth 0
+### Starting Depth 0
 
 ```
 {
@@ -25,7 +25,7 @@ The processor supports these optional parameters:
         "component": "keboola.processor-flatten-folders"
     },
     "parameters": {
-        "depth": 0
+        "starting_depth": 0
     }
 }
 
@@ -45,7 +45,7 @@ Result
 /data/in/files/subfolder1-subfolder2-file2
 ```
 
-### Depth 1
+### Starting Depth 1
 
 
 ```
@@ -54,7 +54,7 @@ Result
         "component": "keboola.processor-flatten-folders"
     },
     "parameters": {
-        "depth": 1
+        "starting_depth": 1
     }
 }
 
@@ -82,7 +82,7 @@ Result
         "component": "keboola.processor-flatten-folders"
     },
     "parameters": {
-        "depth": 0
+        "starting_depth": 0
     }
 }
 

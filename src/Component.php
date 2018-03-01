@@ -41,7 +41,7 @@ class Component extends BaseComponent
         ;
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
-            if ($config->getDepth() === 0 || count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
+            if ($config->getStartingDepth() === 0 || count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
                 $flattenedName = flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
             } else {
                 $fileSystem->mkdir(

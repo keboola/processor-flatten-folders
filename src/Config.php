@@ -8,8 +8,8 @@ use Keboola\Component\Config\BaseConfig;
 
 class Config extends BaseConfig
 {
-    public function getDepth(): int
+    public function getStartingDepth(): int
     {
-        return $this->getValue(['parameters', 'depth']);
+        return $this->getValue(['parameters', 'starting_depth']);
     }
 }

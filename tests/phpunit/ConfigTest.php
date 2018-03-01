@@ -10,7 +10,7 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetDepth(): void
     {
-        $config = new Config(['parameters' => ['depth' => 1]]);
-        $this->assertEquals(1, $config->getDepth());
+        $config = new Config(['parameters' => ['starting_depth' => 1]]);
+        $this->assertEquals(1, $config->getStartingDepth());
     }
 }
