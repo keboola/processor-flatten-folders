@@ -23,7 +23,7 @@
             "Keboola\\Processor\\FlattenFolders\\": "src/"
         },
         "files": [
-            "src/flattenFilename.php"
+            "src/flattenPath.php"
         ]
     },
     "autoload-dev": {

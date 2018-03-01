@@ -36,7 +36,7 @@ class Component extends BaseComponent
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
             if ($config->getDepth() === 0 || count($pathParts) === $dataDirPartsCount + 3) {
-                $flattenedName = flattenFilename(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
+                $flattenedName = flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
             } else {
                 $fileSystem->mkdir(
                     $this->getDataDir() .
@@ -47,7 +47,7 @@ class Component extends BaseComponent
                 );
                 $flattenedName = $pathParts[$dataDirPartsCount + self::OFFSET_FOLDER] .
                     "/" .
-                    flattenFilename(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
+                    flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
             }
             $destination = $this->getDataDir() .
                 "/out/" .
