@@ -7,13 +7,6 @@ namespace Keboola\Processor\FlattenFolders;
 use Keboola\Component\BaseComponent;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * Class Component
- *
- * Main processor class
- *
- * @package Keboola\Processor\FlattenFolders
- */
 class Component extends BaseComponent
 {
 
@@ -31,10 +24,6 @@ class Component extends BaseComponent
         return Config::class;
     }
 
-    /**
-     * Main execution routine
-     * @return void
-     */
     public function run(): void
     {
         /** @var Config $config */

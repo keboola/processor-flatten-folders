@@ -7,13 +7,6 @@ namespace Keboola\Processor\FlattenFolders;
 use Keboola\Component\Config\BaseConfigDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
-/**
- * Class ConfigDefinition
- *
- * ConfigDefinition for the processor
- *
- * @package Keboola\Processor\FlattenFolders
- */
 class ConfigDefinition extends BaseConfigDefinition
 {
     /**
