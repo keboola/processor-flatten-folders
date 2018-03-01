@@ -33,10 +33,10 @@ class Component extends BaseComponent
         $dataDirPartsCount = count(explode('/', $this->getDataDir()));
         $fileSystem = new Filesystem();
         $finder
-            ->notName("*.manifest")
-            ->in($this->getDataDir() . "/in/files")
+            ->notName('*.manifest')
+            ->in($this->getDataDir() . '/in/files')
             ->files()
-            ->in($this->getDataDir() . "/in/tables")
+            ->in($this->getDataDir() . '/in/tables')
             ->files()
         ;
         foreach ($finder as $sourceFile) {
@@ -46,19 +46,19 @@ class Component extends BaseComponent
             } else {
                 $fileSystem->mkdir(
                     $this->getDataDir() .
-                    "/out/" .
+                    '/out/' .
                     $pathParts[$dataDirPartsCount + self::OFFSET_FILE_TYPE] .
-                    "/" .
+                    '/' .
                     $pathParts[$dataDirPartsCount + self::OFFSET_FOLDER]
                 );
                 $flattenedName = $pathParts[$dataDirPartsCount + self::OFFSET_FOLDER] .
-                    "/" .
+                    '/' .
                     flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
             }
             $destination = $this->getDataDir() .
-                "/out/" .
+                '/out/' .
                 $pathParts[$dataDirPartsCount + 1] .
-                "/" .
+                '/' .
                 $flattenedName;
             $fileSystem->rename($sourceFile->getPathname(), $destination);
         }

@@ -17,8 +17,8 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
         $validEmptyConfig = ['parameters' => []];
         $processedConfig = $processor->processConfiguration($definition, [$validEmptyConfig]);
         $expectedConfig = [
-            "parameters" => [
-                "starting_depth" => 0,
+            'parameters' => [
+                'starting_depth' => 0,
             ],
         ];
         $this->assertSame($expectedConfig, $processedConfig);
@@ -31,8 +31,8 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
         $validConfigDefinition = ['parameters' => ['starting_depth' => 1]];
         $processedConfig = $processor->processConfiguration($definition, [$validConfigDefinition]);
         $expectedConfig = [
-            "parameters" => [
-                "starting_depth" => 1,
+            'parameters' => [
+                'starting_depth' => 1,
             ],
         ];
         $this->assertSame($expectedConfig, $processedConfig);

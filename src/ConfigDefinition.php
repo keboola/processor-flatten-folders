@@ -15,11 +15,11 @@ class ConfigDefinition extends BaseConfigDefinition
     public function getParametersDefinition()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root("parameters");
+        $rootNode = $treeBuilder->root('parameters');
         // @formatter:off
         $rootNode
             ->children()
-                ->integerNode("starting_depth")
+                ->integerNode('starting_depth')
                     ->min(0)
                     ->max(1)
                     ->defaultValue(0)
