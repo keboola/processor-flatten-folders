@@ -6,9 +6,6 @@ namespace Keboola\Processor\FlattenFolders\Tests;
 
 use Keboola\Processor\FlattenFolders\Config;
 
-/**
- * Class ConfigTest
- */
 class ConfigTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetDepth(): void

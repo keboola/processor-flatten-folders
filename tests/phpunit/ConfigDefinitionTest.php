@@ -8,9 +8,6 @@ use Keboola\Processor\FlattenFolders\ConfigDefinition;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
-/**
- * Class ConfigDefinitionTest
- */
 class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
 {
     public function testValidEmptyConfigDefinition(): void

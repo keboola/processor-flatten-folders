@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Keboola\Processor\FlattenFolders\Tests;
 
-/**
- * Class FlattenPathTest
- */
 class FlattenPathTest extends \PHPUnit\Framework\TestCase
 {
     public function testSingleNode(): void
