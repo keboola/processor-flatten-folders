@@ -1,0 +1,9 @@
+version: '2'
+services:
+  dev:
+    build: .
+    image: keboola/processor-flatten-folders
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/code:cached
