@@ -30,12 +30,18 @@ class Component extends BaseComponent
         $config = $this->getConfig();
 
         $finder = new \Symfony\Component\Finder\Finder();
-        $finder->notName("*.manifest")->in($this->getDataDir() . "/in/files")->files()->in($this->getDataDir() . "/in/tables")->files();
         $dataDirPartsCount = count(explode('/', $this->getDataDir()));
         $fileSystem = new Filesystem();
+        $finder
+            ->notName("*.manifest")
+            ->in($this->getDataDir() . "/in/files")
+            ->files()
+            ->in($this->getDataDir() . "/in/tables")
+            ->files()
+        ;
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
-            if ($config->getDepth() === 0 || count($pathParts) === $dataDirPartsCount + 3) {
+            if ($config->getDepth() === 0 || count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
                 $flattenedName = flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
             } else {
                 $fileSystem->mkdir(
