@@ -6,8 +6,6 @@ before_script:
   - docker -v
   - docker build -t keboola/processor-flatten-folder .
 script: docker run keboola/processor-flatten-folder composer ci
-after_success:
-  - docker images
 deploy:
   provider: script
   skip_cleanup: true
