@@ -40,8 +40,7 @@ class Component extends BaseComponent
             ->in($this->getDataDir() . '/in/files')
             ->files()
             ->in($this->getDataDir() . '/in/tables')
-            ->files()
-        ;
+            ->files();
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
             if ($config->getStartingDepth() === 0 || count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
@@ -59,9 +58,12 @@ class Component extends BaseComponent
                     flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
             }
             if (strlen($flattenedName) > self::MAX_FILENAME_LENGTH) {
-                throw new UserException(
-                    sprintf('Maximum allowed flattened file name length is %d', self::MAX_FILENAME_LENGTH)
-                );
+                throw new UserException(sprintf(
+                    'Maximum allowed flattened file name length is %d. File %s length is %d characters.',
+                    self::MAX_FILENAME_LENGTH,
+                    $flattenedName,
+                    strlen($flattenedName)
+                ));
             }
             $destination = $this->getDataDir() .
                 '/out/' .
