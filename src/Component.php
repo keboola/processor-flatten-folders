@@ -84,7 +84,7 @@ class Component extends BaseComponent
             case ConcatStrategy::STRATEGY_NAME:
                 return new ConcatStrategy();
             case HashStrategy::STRATEGY_NAME:
-                throw new \Exception('not implemented yet');
+                return new HashStrategy();
             default:
                 throw new \Exception(sprintf('unknown strategy %d', $flattenStrategyName));
         }

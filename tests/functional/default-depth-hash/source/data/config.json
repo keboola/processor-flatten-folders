@@ -1,0 +1,6 @@
+{
+  "parameters": {
+    "starting_depth": 0,
+    "flatten_strategy": "hash"
+  }
+}
