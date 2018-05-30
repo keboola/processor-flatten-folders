@@ -7,7 +7,6 @@ namespace Keboola\Processor\FlattenFolders;
 use Keboola\Component\Config\BaseConfigDefinition;
 use Keboola\Processor\FlattenFolders\FlattenStrategy\ConcatStrategy;
 use Keboola\Processor\FlattenFolders\FlattenStrategy\HashSha256Strategy;
-use PhpParser\Node\Expr\AssignOp\Concat;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ConfigDefinition extends BaseConfigDefinition
