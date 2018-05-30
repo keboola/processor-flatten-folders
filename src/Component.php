@@ -58,7 +58,8 @@ class Component extends BaseComponent
                     flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
             }
             if (strlen($flattenedName) > self::MAX_FILENAME_LENGTH) {
-                throw new UserException(sprintf(
+
+                throw new \Exception(sprintf(
                     'Maximum allowed flattened file name length is %d. File %s length is %d characters.',
                     self::MAX_FILENAME_LENGTH,
                     $flattenedName,
