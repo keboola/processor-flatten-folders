@@ -7,6 +7,7 @@ namespace Keboola\Processor\FlattenFolders;
 use Keboola\Component\BaseComponent;
 use Keboola\Component\UserException;
 use Keboola\Processor\FlattenFolders\FlattenStrategy\ConcatStrategy;
+use Keboola\Processor\FlattenFolders\FlattenStrategy\HashStrategy;
 use Symfony\Component\Filesystem\Filesystem;
 
 class Component extends BaseComponent
@@ -43,7 +44,7 @@ class Component extends BaseComponent
             ->in($this->getDataDir() . '/in/tables')
             ->files();
 
-        $flattenStrategy = new ConcatStrategy();
+        $flattenStrategy = self::createStrategy($config->getFlattenStrategy());
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
             if ($config->getStartingDepth() === 0 || count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
@@ -74,6 +75,18 @@ class Component extends BaseComponent
                 '/' .
                 $flattenedName;
             $fileSystem->rename($sourceFile->getPathname(), $destination);
+        }
+    }
+
+    private static function createStrategy(string $flattenStrategyName): FlattenStrategyInterface
+    {
+        switch ($flattenStrategyName) {
+            case ConcatStrategy::STRATEGY_NAME:
+                return new ConcatStrategy();
+            case HashStrategy::STRATEGY_NAME:
+                throw new \Exception('not implemented yet');
+            default:
+                throw new \Exception(sprintf('unknown strategy %d', $flattenStrategyName));
         }
     }
 }

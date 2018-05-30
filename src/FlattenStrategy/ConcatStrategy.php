@@ -8,6 +8,8 @@ use Keboola\Processor\FlattenFolders\FlattenStrategyInterface;
 
 class ConcatStrategy implements FlattenStrategyInterface
 {
+    public const STRATEGY_NAME = 'concat';
+
     public function flattenPath(array $pathParts): string
     {
         return join('-', array_map(function ($pathPart) {
