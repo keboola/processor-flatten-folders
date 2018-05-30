@@ -1,6 +1,6 @@
 {
   "parameters": {
     "starting_depth": 0,
-    "flatten_strategy": "hash"
+    "flatten_strategy": "hash-sha256"
   }
 }

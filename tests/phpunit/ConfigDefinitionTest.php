@@ -79,7 +79,7 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
             'unknown flatten strategy' => [
                 ['parameters' => ['flatten_strategy' => 'random']],
                 InvalidConfigurationException::class,
-                'The value "random" is not allowed for path "root.parameters.flatten_strategy". Permissible values: "concat", "hash"',
+                'The value "random" is not allowed for path "root.parameters.flatten_strategy". Permissible values: "concat", "hash-sha256"',
             ],
         ];
     }

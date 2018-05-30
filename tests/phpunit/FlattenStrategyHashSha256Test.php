@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Keboola\Processor\FlattenFolders\Tests;
 
 use Keboola\Processor\FlattenFolders\FlattenStrategy\ConcatStrategy;
-use Keboola\Processor\FlattenFolders\FlattenStrategy\HashStrategy;
+use Keboola\Processor\FlattenFolders\FlattenStrategy\HashSha256Strategy;
 use PHPUnit\Framework\TestCase;
 
-class FlattenStrategyHashTest extends TestCase
+class FlattenStrategyHashSha256Test extends TestCase
 {
 
     /**
@@ -18,7 +18,7 @@ class FlattenStrategyHashTest extends TestCase
      */
     public function testFlatten(array $path, string $expected): void
     {
-        $hash = new HashStrategy();
+        $hash = new HashSha256Strategy();
         $this->assertEquals($expected, $hash->flattenPath($path));
     }
 
@@ -27,15 +27,15 @@ class FlattenStrategyHashTest extends TestCase
         return [
             [
                 ['folder', 'file'],
-                '6f619f3079c75f39cd062abb41dcd2d05c152361',
+                '92ad57d53b8e7810ed70d41ef73134a2fcef80fb7cd63afcb08e1a9c364936ca',
             ],
             [
                 ['file', 'folder'],
-                'ebf381c25fa942f2e0e6dc63deb3ea54a6cef664',
+                '512cc4a50e217dbce7491e59c563292c4bf702c07c1f8c4b3d6f213e17737380',
             ],
             [
                 ['file-file'],
-                'a34983024fd243834e9bb29e59ff73ae507bc4d4',
+                'd8740efe800751878558d40eef5000e637b78ec6eebeb33b2e11009b7e4d0444',
             ],
         ];
     }

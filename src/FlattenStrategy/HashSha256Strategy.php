@@ -7,11 +7,11 @@ namespace Keboola\Processor\FlattenFolders\FlattenStrategy;
 use Keboola\Processor\FlattenFolders\FlattenStrategyInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
-class HashStrategy implements FlattenStrategyInterface
+class HashSha256Strategy implements FlattenStrategyInterface
 {
-    public const STRATEGY_NAME = 'hash';
+    public const STRATEGY_NAME = 'hash-sha256';
 
-    /** @var JsonEncoder  */
+    /** @var JsonEncoder */
     private $jsonEncoder;
 
     public function __construct()
@@ -21,9 +21,14 @@ class HashStrategy implements FlattenStrategyInterface
 
     public function flattenPath(array $pathParts): string
     {
-        return sha1($this->jsonEncoder->encode(
-            $pathParts,
+        return hash('sha256', $this->jsonEncode($pathParts));
+    }
+
+    private function jsonEncode(array $data): string
+    {
+        return $this->jsonEncoder->encode(
+            $data,
             JsonEncoder::FORMAT
-        ));
+        );
     }
 }

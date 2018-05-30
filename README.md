@@ -7,16 +7,16 @@ Manifest files are ignored (and not copied).
 
 Processor offers multiple flatten strategies:
 
-**Concat Flatten strategy (default)**
+**Concat Flatten strategy (concat)**
 
-`/` character in the path will be replaced with a `-` character, eg `folder1/file1.csv => folder1-file1.csv`. 
+This is a default strategy. `/` character in the path will be replaced with a `-` character, eg `folder1/file1.csv => folder1-file1.csv`. 
 Existing `-` characters will be escaped with an extra `-` character to resolve possible collisions, eg. `collision-file.csv => collision--file.csv`. 
 
 There is a limitation of maximum flattened file name length `255` characters.
 
-**Hash Flatten strategy**
+**Hash Flatten strategy (hash-sha256)**
 
-Flattened file names are `sha1` hashes of files path.
+Flattened file names are `sha256` hashes of files path.
 
    
 # Usage
@@ -24,7 +24,7 @@ Flattened file names are `sha1` hashes of files path.
 The processor supports these optional parameters:
 
  - `starting_depth` -- nesting level where the flattening starts, allowed values `0`, `1`, default `0`.
- - `flatten_strategy` -- strategy used for flattened files naming, allowed values `concat`, `hash`, default `hash`.
+ - `flatten_strategy` -- strategy used for flattened files naming, allowed values `concat`, `hash-sha256`, default `concat`.
 ## Examples
 
 ### Starting Depth 0

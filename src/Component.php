@@ -7,7 +7,7 @@ namespace Keboola\Processor\FlattenFolders;
 use Keboola\Component\BaseComponent;
 use Keboola\Component\UserException;
 use Keboola\Processor\FlattenFolders\FlattenStrategy\ConcatStrategy;
-use Keboola\Processor\FlattenFolders\FlattenStrategy\HashStrategy;
+use Keboola\Processor\FlattenFolders\FlattenStrategy\HashSha256Strategy;
 use Symfony\Component\Filesystem\Filesystem;
 
 class Component extends BaseComponent
@@ -83,8 +83,8 @@ class Component extends BaseComponent
         switch ($flattenStrategyName) {
             case ConcatStrategy::STRATEGY_NAME:
                 return new ConcatStrategy();
-            case HashStrategy::STRATEGY_NAME:
-                return new HashStrategy();
+            case HashSha256Strategy::STRATEGY_NAME:
+                return new HashSha256Strategy();
             default:
                 throw new \Exception(sprintf('unknown strategy %d', $flattenStrategyName));
         }
