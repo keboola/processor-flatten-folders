@@ -16,7 +16,7 @@ class FlattenStrategyConcatTest extends TestCase
 
     public function testMultiNode(): void
     {
-        self::assertEquals('folder-file',  (new ConcatStrategy())->flattenPath(['folder', 'file']));
+        self::assertEquals('folder-file', (new ConcatStrategy())->flattenPath(['folder', 'file']));
     }
 
     public function testReplaceDash(): void

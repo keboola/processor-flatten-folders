@@ -26,7 +26,7 @@ class ConfigDefinition extends BaseConfigDefinition
                 ->enumNode('flatten_strategy')
                     ->values([
                         ConcatStrategy::STRATEGY_NAME,
-                        HashStrategy::STRATEGY_NAME
+                        HashStrategy::STRATEGY_NAME,
                     ])
                     ->defaultValue(ConcatStrategy::STRATEGY_NAME)
                 ->end()
