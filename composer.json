@@ -22,10 +22,7 @@
     "autoload": {
         "psr-4": {
             "Keboola\\Processor\\FlattenFolders\\": "src/"
-        },
-        "files": [
-            "src/flattenPath.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

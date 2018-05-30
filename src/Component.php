@@ -6,6 +6,7 @@ namespace Keboola\Processor\FlattenFolders;
 
 use Keboola\Component\BaseComponent;
 use Keboola\Component\UserException;
+use Keboola\Processor\FlattenFolders\FlattenStrategy\ConcatStrategy;
 use Symfony\Component\Filesystem\Filesystem;
 
 class Component extends BaseComponent
@@ -41,10 +42,12 @@ class Component extends BaseComponent
             ->files()
             ->in($this->getDataDir() . '/in/tables')
             ->files();
+
+        $flattenStrategy = new ConcatStrategy();
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
             if ($config->getStartingDepth() === 0 || count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
-                $flattenedName = flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
+                $flattenedName = $flattenStrategy->flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
             } else {
                 $fileSystem->mkdir(
                     $this->getDataDir() .
@@ -55,7 +58,7 @@ class Component extends BaseComponent
                 );
                 $flattenedName = $pathParts[$dataDirPartsCount + self::OFFSET_FOLDER] .
                     '/' .
-                    flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
+                    $flattenStrategy->flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
             }
             if (strlen($flattenedName) > self::MAX_FILENAME_LENGTH) {
                 throw new UserException(sprintf(
