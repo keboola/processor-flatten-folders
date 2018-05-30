@@ -22,10 +22,7 @@
     "autoload": {
         "psr-4": {
             "Keboola\\Processor\\FlattenFolders\\": "src/"
-        },
-        "files": [
-            "src/flattenPath.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -41,6 +38,7 @@
         ],
         "phpstan": "phpstan analyse ./src ./tests --level=max --no-progress -c phpstan.neon",
         "phpcs": "phpcs -n --ignore=vendor --extensions=php .",
+        "phpcbf": "phpcbf -n --ignore=vendor --extensions=php .",
         "phplint": "parallel-lint -j 10 --exclude vendor .",
         "build": [
             "@phplint",
