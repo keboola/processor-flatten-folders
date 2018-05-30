@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Keboola\Processor\FlattenFolders;
 
 use Keboola\Component\BaseComponent;
+use Keboola\Component\UserException;
 use Symfony\Component\Filesystem\Filesystem;
 
 class Component extends BaseComponent
@@ -13,6 +14,8 @@ class Component extends BaseComponent
     private const OFFSET_FILE_TYPE = 1;
     private const OFFSET_FOLDER = 2;
     private const OFFSET_SUBFOLDER = 3;
+
+    private const MAX_FILENAME_LENGTH = '255';
 
     protected function getConfigDefinitionClass(): string
     {
@@ -37,8 +40,7 @@ class Component extends BaseComponent
             ->in($this->getDataDir() . '/in/files')
             ->files()
             ->in($this->getDataDir() . '/in/tables')
-            ->files()
-        ;
+            ->files();
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
             if ($config->getStartingDepth() === 0 || count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
@@ -54,6 +56,14 @@ class Component extends BaseComponent
                 $flattenedName = $pathParts[$dataDirPartsCount + self::OFFSET_FOLDER] .
                     '/' .
                     flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
+            }
+            if (strlen($flattenedName) > self::MAX_FILENAME_LENGTH) {
+                throw new UserException(sprintf(
+                    'Maximum allowed flattened file name length is %d. File %s length is %d characters.',
+                    self::MAX_FILENAME_LENGTH,
+                    $flattenedName,
+                    strlen($flattenedName)
+                ));
             }
             $destination = $this->getDataDir() .
                 '/out/' .
