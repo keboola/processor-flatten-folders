@@ -26,7 +26,7 @@ class HashSha256Strategy implements FlattenStrategyInterface
 
     private function jsonEncode(array $data): string
     {
-        return $this->jsonEncoder->encode(
+        return (string) $this->jsonEncoder->encode(
             $data,
             JsonEncoder::FORMAT
         );
