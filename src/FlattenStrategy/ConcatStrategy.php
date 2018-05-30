@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Keboola\Processor\FlattenFolders\FlattenStrategy;
 
-use Keboola\Processor\FlattenFolders\FlattenStrategy;
+use Keboola\Processor\FlattenFolders\FlattenStrategyInterface;
 
-class ConcatStrategy implements FlattenStrategy
+class ConcatStrategy implements FlattenStrategyInterface
 {
     public function flattenPath(array $pathParts): string
     {

@@ -20,6 +20,10 @@ class ConfigDefinition extends BaseConfigDefinition
                     ->max(1)
                     ->defaultValue(0)
                 ->end()
+                ->enumNode('flatten_strategy')
+                    ->values(['concat', 'hash'])
+                    ->defaultValue('concat')
+                ->end()
             ->end()
         ;
         // @formatter:on

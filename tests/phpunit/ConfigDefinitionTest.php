@@ -19,6 +19,7 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
         $expectedConfig = [
             'parameters' => [
                 'starting_depth' => 0,
+                'flatten_strategy' => 'concat',
             ],
         ];
         $this->assertSame($expectedConfig, $processedConfig);
@@ -28,11 +29,12 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
     {
         $definition = new ConfigDefinition();
         $processor = new Processor();
-        $validConfigDefinition = ['parameters' => ['starting_depth' => 1]];
+        $validConfigDefinition = ['parameters' => ['starting_depth' => 1, 'flatten_strategy' => 'concat']];
         $processedConfig = $processor->processConfiguration($definition, [$validConfigDefinition]);
         $expectedConfig = [
             'parameters' => [
                 'starting_depth' => 1,
+                'flatten_strategy' => 'concat',
             ],
         ];
         $this->assertSame($expectedConfig, $processedConfig);
@@ -74,7 +76,11 @@ class ConfigDefinitionTest extends \PHPUnit\Framework\TestCase
                 InvalidConfigurationException::class,
                 'The value -1 is too small for path "root.parameters.starting_depth". Should be greater than or equal to 0',
             ],
-
+            'unknown flatten strategy' => [
+                ['parameters' => ['flatten_strategy' => 'random']],
+                InvalidConfigurationException::class,
+                'The value "random" is not allowed for path "root.parameters.flatten_strategy". Permissible values: "concat", "hash"',
+            ],
         ];
     }
 }
