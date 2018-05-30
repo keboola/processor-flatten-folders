@@ -8,7 +8,7 @@
         "symfony/finder": "^4.0",
         "PHP": "^7.1",
         "keboola/php-temp": "^1.0",
-        "keboola/php-component": "^1.0",
+        "keboola/php-component": "^4.2",
         "symfony/process": "^4.0"
     },
     "require-dev": {
