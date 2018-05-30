@@ -2,19 +2,29 @@
 
 [![Build Status](https://travis-ci.org/keboola/processor-flatten-folders.svg?branch=master)](https://travis-ci.org/keboola/processor-flatten-folders)
 
-Takes all folders in `/data/in/files`, `/data/in/tables` and flattens the subfolder structure. 
+Takes all folders in `/data/in/files`, `/data/in/tables` and flattens the subfolder structure.
+Manifest files are ignored (and not copied).
+
+Processor offers multiple flatten strategies:
+
+**Concat Flatten strategy (default)**
+
 `/` character in the path will be replaced with a `-` character, eg `folder1/file1.csv => folder1-file1.csv`. 
 Existing `-` characters will be escaped with an extra `-` character to resolve possible collisions, eg. `collision-file.csv => collision--file.csv`. 
 
-Manifest files are ignored (and not copied).
+There is a limitation of maximum flattened file name length `255` characters.
+
+**Hash Flatten strategy**
+
+Flattened file names are `sha1` hashes of files path.
+
    
 # Usage
 
 The processor supports these optional parameters:
 
  - `starting_depth` -- nesting level where the flattening starts, allowed values `0`, `1`, default `0`.
-
-
+ - `flatten_strategy` -- strategy used for flattened files naming, allowed values `concat`, `hash`, default `hash`.
 ## Examples
 
 ### Starting Depth 0
