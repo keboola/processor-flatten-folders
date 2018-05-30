@@ -5,19 +5,15 @@ declare(strict_types=1);
 namespace Keboola\Processor\FlattenFolders;
 
 use Keboola\Component\Config\BaseConfigDefinition;
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ConfigDefinition extends BaseConfigDefinition
 {
-    /**
-     * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition|\Symfony\Component\Config\Definition\Builder\NodeDefinition
-     */
-    public function getParametersDefinition()
+    public function getParametersDefinition(): ArrayNodeDefinition
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('parameters');
+        $parametersNode = parent::getParametersDefinition();
         // @formatter:off
-        $rootNode
+        $parametersNode
             ->children()
                 ->integerNode('starting_depth')
                     ->min(0)
@@ -27,6 +23,6 @@ class ConfigDefinition extends BaseConfigDefinition
             ->end()
         ;
         // @formatter:on
-        return $rootNode;
+        return $parametersNode;
     }
 }
