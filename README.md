@@ -135,3 +135,7 @@ docker-compose run --rm dev composer tests
    - build image
    - execute tests against new image
    - publish image to ECR if release is tagged
+
+## License
+
+MIT licensed, see [LICENSE](./LICENSE) file.
