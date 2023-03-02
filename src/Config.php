@@ -10,11 +10,11 @@ class Config extends BaseConfig
 {
     public function getStartingDepth(): int
     {
-        return $this->getValue(['parameters', 'starting_depth']);
+        return $this->getIntValue(['parameters', 'starting_depth']);
     }
 
     public function getFlattenStrategy(): string
     {
-        return $this->getValue(['parameters', 'flatten_strategy']);
+        return $this->getStringValue(['parameters', 'flatten_strategy']);
     }
 }

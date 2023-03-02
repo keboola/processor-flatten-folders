@@ -12,7 +12,7 @@ Processor offers multiple flatten strategies:
 This is a default strategy. `/` character in the path will be replaced with a `-` character, eg `folder1/file1.csv => folder1-file1.csv`. 
 Existing `-` characters will be escaped with an extra `-` character to resolve possible collisions, eg. `collision-file.csv => collision--file.csv`. 
 
-There is a limitation of maximum flattened file name length `255` characters.
+There is a limitation of maximum flattened file name length `4096` characters.
 
 **Hash Flatten strategy (hash-sha256)**
 
