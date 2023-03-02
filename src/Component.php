@@ -31,7 +31,7 @@ class Component extends BaseComponent
         return Config::class;
     }
 
-    public function run(): void
+    protected function run(): void
     {
         /** @var Config $config */
         $config = $this->getConfig();
