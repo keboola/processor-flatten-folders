@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Keboola\Processor\FlattenFolders\FunctionalTests;
 
+use InvalidArgumentException;
 use Keboola\DatadirTests\DatadirTestsFromDirectoryProvider;
 use Keboola\DatadirTests\DatadirTestSpecification;
 use Keboola\DatadirTests\DatadirTestSpecificationInterface;
 use Symfony\Component\Finder\SplFileInfo;
-use InvalidArgumentException;
 
 class DatadirTestProvider extends DatadirTestsFromDirectoryProvider
 {
