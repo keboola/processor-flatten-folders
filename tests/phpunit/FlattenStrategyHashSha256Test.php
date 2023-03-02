@@ -19,7 +19,7 @@ class FlattenStrategyHashSha256Test extends TestCase
     public function testFlatten(array $path, string $expected): void
     {
         $hash = new HashSha256Strategy();
-        $this->assertEquals($expected, $hash->flattenPath($path));
+        self::assertEquals($expected, $hash->flattenPath($path));
     }
 
     public function flattenProvider(): array

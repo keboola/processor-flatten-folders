@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Keboola\Processor\FlattenFolders;
 
+use Exception;
 use Keboola\Component\BaseComponent;
 use Keboola\Component\UserException;
 use Keboola\Processor\FlattenFolders\FlattenStrategy\ConcatStrategy;
 use Keboola\Processor\FlattenFolders\FlattenStrategy\HashSha256Strategy;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 class Component extends BaseComponent
 {
@@ -34,7 +36,7 @@ class Component extends BaseComponent
         /** @var Config $config */
         $config = $this->getConfig();
 
-        $finder = new \Symfony\Component\Finder\Finder();
+        $finder = new Finder();
         $dataDirPartsCount = count(explode('/', $this->getDataDir()));
         $fileSystem = new Filesystem();
         $finder
@@ -47,8 +49,11 @@ class Component extends BaseComponent
         $flattenStrategy = self::createStrategy($config->getFlattenStrategy());
         foreach ($finder as $sourceFile) {
             $pathParts = explode('/', $sourceFile->getPathname());
-            if ($config->getStartingDepth() === 0 || count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
-                $flattenedName = $flattenStrategy->flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER));
+            if ($config->getStartingDepth() === 0 ||
+                    count($pathParts) === $dataDirPartsCount + self::OFFSET_SUBFOLDER) {
+                $flattenedName = $flattenStrategy->flattenPath(
+                    array_splice($pathParts, $dataDirPartsCount + self::OFFSET_FOLDER)
+                );
             } else {
                 $fileSystem->mkdir(
                     $this->getDataDir() .
@@ -59,7 +64,9 @@ class Component extends BaseComponent
                 );
                 $flattenedName = $pathParts[$dataDirPartsCount + self::OFFSET_FOLDER] .
                     '/' .
-                    $flattenStrategy->flattenPath(array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER));
+                    $flattenStrategy->flattenPath(
+                        array_splice($pathParts, $dataDirPartsCount + self::OFFSET_SUBFOLDER)
+                    );
             }
             if (strlen($flattenedName) > self::MAX_FILENAME_LENGTH) {
                 throw new UserException(sprintf(
@@ -86,7 +93,7 @@ class Component extends BaseComponent
             case HashSha256Strategy::STRATEGY_NAME:
                 return new HashSha256Strategy();
             default:
-                throw new \Exception(sprintf('unknown strategy %d', $flattenStrategyName));
+                throw new Exception(sprintf('unknown strategy %d', $flattenStrategyName));
         }
     }
 }

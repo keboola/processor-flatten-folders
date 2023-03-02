@@ -6,8 +6,9 @@ namespace Keboola\Processor\FlattenFolders\Tests;
 
 use Keboola\Processor\FlattenFolders\Config;
 use Keboola\Processor\FlattenFolders\ConfigDefinition;
+use PHPUnit\Framework\TestCase;
 
-class ConfigTest extends \PHPUnit\Framework\TestCase
+class ConfigTest extends TestCase
 {
     public function testGetDepth(): void
     {
@@ -19,6 +20,6 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
             ],
             new ConfigDefinition()
         );
-        $this->assertEquals(1, $config->getStartingDepth());
+        self::assertEquals(1, $config->getStartingDepth());
     }
 }
