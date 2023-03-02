@@ -25,12 +25,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Keboola\\Processor\\FlattenFolders\\Tests\\": "tests/phpunit/"
+            "Keboola\\Processor\\FlattenFolders\\Tests\\": "tests/phpunit/",
+            "Keboola\\Processor\\FlattenFolders\\FunctionalTests\\": "tests/functional/"
         }
     },
     "scripts": {
         "tests-phpunit": "phpunit",
-        "tests-datadir": "datadir-tests",
+        "tests-datadir": "phpunit tests/functional",
         "tests": [
             "@tests-phpunit",
             "@tests-datadir"
