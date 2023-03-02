@@ -7,7 +7,7 @@ env:
 
   # Developer portal login
   KBC_DEVELOPERPORTAL_VENDOR: "keboola"
-  KBC_DEVELOPERPORTAL_APP: "keboola.keboola.processor-flatten-folders"
+  KBC_DEVELOPERPORTAL_APP: "keboola.processor-flatten-folders"
   KBC_DEVELOPERPORTAL_USERNAME: "keboola+processor_flatten_folders"
   KBC_DEVELOPERPORTAL_PASSWORD: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
 
