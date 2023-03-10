@@ -1,6 +1,6 @@
 # processor-flatten-folders
 
-[![Build Status](https://travis-ci.org/keboola/processor-flatten-folders.svg?branch=master)](https://travis-ci.org/keboola/processor-flatten-folders)
+[![GitHub Actions](https://github.com/keboola/processor-flatten-folders/actions/workflows/push.yml/badge.svg)](https://github.com/keboola/processor-flatten-folders/actions/workflows/push.yml)
 
 Takes all folders in `/data/in/files`, `/data/in/tables` and flattens the subfolder structure.
 Manifest files are ignored (and not copied).
